@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Exida Edits Intro</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+    }
+
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: 300px;
+    }
+
+    .shape {
+      fill: none;
+      stroke: white;
+      stroke-width: 4;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      opacity: 0;
+    }
+
+    .text {
+      font-family: Arial, sans-serif;
+      font-size: 40px;
+      fill: white;
+      opacity: 0;
+      transition: opacity 1s ease-in;
+    }
+
+    @keyframes drawShape {
+      to {
+        stroke-dashoffset: 0;
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <!-- Circle -->
+    <svg id="circleSvg">
+      <circle class="shape" cx="150" cy="150" r="70" />
+    </svg>
+
+    <!-- Triangle -->
+    <svg id="triangleSvg">
+      <polygon class="shape" points="150,60 90,210 210,210" />
+    </svg>
+
+    <!-- Square -->
+    <svg id="squareSvg">
+      <rect class="shape" x="90" y="90" width="120" height="120" />
+    </svg>
+
+    <!-- Text -->
+    <svg id="textSvg" width="300" height="300">
+      <text class="text" x="50%" y="85%" text-anchor="middle">Exida Edits</text>
+    </svg>
+  </div>
+
+  <script>
+    const delay = (ms) => new Promise(res => setTimeout(res, ms));
+
+    async function playIntro() {
+      const circle = document.querySelector('#circleSvg .shape');
+      const triangle = document.querySelector('#triangleSvg .shape');
+      const square = document.querySelector('#squareSvg .shape');
+      const text = document.querySelector('#textSvg .text');
+
+      // Animate Circle
+      circle.style.animation = 'drawShape 1s forwards';
+      await delay(1200);
+
+      // Animate Triangle
+      triangle.style.animation = 'drawShape 1s forwards';
+      await delay(1200);
+
+      // Animate Square
+      square.style.animation = 'drawShape 1s forwards';
+      await delay(1200);
+
+      // Show text
+      text.style.animation = 'fadeIn 2s forwards';
+    }
+
+    playIntro();
+  </script>
+</body>
+</html>
